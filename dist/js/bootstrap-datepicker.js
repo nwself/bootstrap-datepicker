@@ -562,8 +562,19 @@
 
 		setDates: function(){
 			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
+
+			var propagate = true;
+			if (args.length > 1) {
+				propagate = false;
+				args.shift();
+			}
+
 			this.update.apply(this, args);
-			this._trigger('changeDate');
+
+			if (propagate) {
+				this._trigger('changeDate');
+			}
+
 			this.setValue();
 			return this;
 		},
